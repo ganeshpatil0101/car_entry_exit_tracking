@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "527092903133",
+    "firebase_url": "https://carentryexit.firebaseio.com",
+    "project_id": "carentryexit",
+    "storage_bucket": "carentryexit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527092903133:android:529a8f345145e9b213ff34",
+        "android_client_info": {
+          "package_name": "com.example.car_entry_exit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527092903133-a49vumb62javipvkd3m1t8qmcklcei8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCacaAOHanAFvVrsu_4-0JX8gjdRM_Ay-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527092903133-a49vumb62javipvkd3m1t8qmcklcei8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

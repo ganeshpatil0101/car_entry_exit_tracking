@@ -1,3 +1,5 @@
+import 'package:car_entry_exit/services/authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
@@ -6,21 +8,57 @@ import 'custom_route.dart';
 import 'dashboard.dart';
 import 'users.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  LoginScreen({this.auth, this.loginCallback});
   static const routeName = '/auth';
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
 
+  @override
+  State<StatefulWidget> createState() => new _LoginScreenPageSate();
+}
+
+class _LoginScreenPageSate extends State<LoginScreen> {
   Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 2250);
 
-  Future<String> _loginUser(LoginData data) {
-    return Future.delayed(loginTime).then((_) {
-      if (!mockUsers.containsKey(data.name)) {
-        return 'Username not exists';
-      }
-      if (mockUsers[data.name] != data.password) {
-        return 'Password does not match';
-      }
-      return null;
+  Future<String> _loginUser(LoginData data) async {
+    String userId = "";
+    String error = "";
+    widget.auth.signIn(data.name, data.password).then((FirebaseUser res) {
+      print(res);
+      userId = res.email;
+      widget.loginCallback();
+    }).catchError((err) {
+      print(err);
+      error = err.message;
     });
+    print('Signed in: $userId');
+    if (userId != null || userId != "") {
+      return userId;
+    } else if (error != null || error != "") {
+      return error;
+    }
+    return userId;
+  }
+
+  Future<String> _signUpUser(LoginData data) async {
+    String userId = "";
+    String error = "";
+    widget.auth.signUp(data.name, data.password).then((FirebaseUser res) {
+      print(res);
+      userId = res.email;
+      widget.loginCallback();
+    }).catchError((err) {
+      print(err);
+      error = err.message;
+    });
+    print('Signedup in: $userId');
+    if (userId != null || userId != "") {
+      return userId;
+    } else if (error != null || error != "") {
+      return error;
+    }
+    return userId;
   }
 
   Future<String> _recoverPassword(String name) {
@@ -156,12 +194,12 @@ class LoginScreen extends StatelessWidget {
         print('Signup info');
         print('Name: ${loginData.name}');
         print('Password: ${loginData.password}');
-        return _loginUser(loginData);
+        return _signUpUser(loginData);
       },
       onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(FadePageRoute(
-          builder: (context) => DashboardScreen(),
-        ));
+        // Navigator.of(context).pushReplacement(FadePageRoute(
+        //   builder: (context) => DashboardScreen(),
+        // ));
       },
       onRecoverPassword: (name) {
         print('Recover password info');
@@ -169,7 +207,7 @@ class LoginScreen extends StatelessWidget {
         return _recoverPassword(name);
         // Show new password dialog
       },
-      showDebugButtons: true,
+      showDebugButtons: false,
     );
   }
 }

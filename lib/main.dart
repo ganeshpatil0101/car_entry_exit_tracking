@@ -1,5 +1,7 @@
 import 'package:car_entry_exit/screen/dashboard.dart';
+import 'package:car_entry_exit/screen/root_page.dart';
 import 'package:car_entry_exit/screen/transition_route_observer.dart';
+import 'package:car_entry_exit/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'screen/login.dart';
 
@@ -64,7 +66,8 @@ class MyApp extends StatelessWidget {
       //   // closer together (more dense) than on mobile platforms.
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
       // ),
-      home: LoginScreen(),
+      //home: LoginScreen(),
+      home: new RootPage(auth: new Auth()),
       navigatorObservers: [TransitionRouteObserver()],
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
