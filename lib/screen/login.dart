@@ -20,12 +20,8 @@ class _LoginScreenPageSate extends State<LoginScreen> {
   Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 2250);
 
   Future<String> _loginUser(LoginData data) async {
-    String userId = "";
     String error = "";
-    userId = await widget.auth
-        .signIn(data.name, data.password)
-        .then((FirebaseUser res) {
-      userId = res.email;
+    await widget.auth.signIn(data.name, data.password).then((FirebaseUser res) {
       widget.loginCallback();
     }).catchError((err) {
       error = err.message;
@@ -37,23 +33,17 @@ class _LoginScreenPageSate extends State<LoginScreen> {
   }
 
   Future<String> _signUpUser(LoginData data) async {
-    String userId = "";
     String error = "";
     await widget.auth.signUp(data.name, data.password).then((FirebaseUser res) {
-      print(res);
-      userId = res.email;
       widget.loginCallback();
     }).catchError((err) {
       print(err);
       error = err.message;
     });
-    print('Signedup in: $userId');
-    if (userId != null || userId != "") {
-      return userId;
-    } else if (error != null || error != "") {
+    if (!(error == null || error == "")) {
       return error;
     }
-    return userId;
+    return null;
   }
 
   Future<String> _recoverPassword(String name) {
@@ -186,11 +176,12 @@ class _LoginScreenPageSate extends State<LoginScreen> {
         String err = await _loginUser(loginData);
         return err;
       },
-      onSignup: (loginData) {
+      onSignup: (loginData) async {
         print('Signup info');
         print('Name: ${loginData.name}');
         print('Password: ${loginData.password}');
-        return _signUpUser(loginData);
+        String err = await _signUpUser(loginData);
+        return err;
       },
       onSubmitAnimationCompleted: () {
         // Navigator.of(context).pushReplacement(FadePageRoute(
