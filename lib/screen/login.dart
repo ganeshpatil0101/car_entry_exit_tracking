@@ -4,8 +4,6 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'constants.dart';
-import 'custom_route.dart';
-import 'dashboard.dart';
 import 'users.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,27 +22,24 @@ class _LoginScreenPageSate extends State<LoginScreen> {
   Future<String> _loginUser(LoginData data) async {
     String userId = "";
     String error = "";
-    widget.auth.signIn(data.name, data.password).then((FirebaseUser res) {
-      print(res);
+    userId = await widget.auth
+        .signIn(data.name, data.password)
+        .then((FirebaseUser res) {
       userId = res.email;
       widget.loginCallback();
     }).catchError((err) {
-      print(err);
       error = err.message;
     });
-    print('Signed in: $userId');
-    if (userId != null || userId != "") {
-      return userId;
-    } else if (error != null || error != "") {
+    if (!(error == null || error == "")) {
       return error;
     }
-    return userId;
+    return null;
   }
 
   Future<String> _signUpUser(LoginData data) async {
     String userId = "";
     String error = "";
-    widget.auth.signUp(data.name, data.password).then((FirebaseUser res) {
+    await widget.auth.signUp(data.name, data.password).then((FirebaseUser res) {
       print(res);
       userId = res.email;
       widget.loginCallback();
@@ -184,11 +179,12 @@ class _LoginScreenPageSate extends State<LoginScreen> {
         }
         return null;
       },
-      onLogin: (loginData) {
+      onLogin: (loginData) async {
         print('Login info');
         print('Name: ${loginData.name}');
         print('Password: ${loginData.password}');
-        return _loginUser(loginData);
+        String err = await _loginUser(loginData);
+        return err;
       },
       onSignup: (loginData) {
         print('Signup info');
