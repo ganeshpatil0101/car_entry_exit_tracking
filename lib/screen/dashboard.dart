@@ -1,3 +1,4 @@
+import 'package:car_entry_exit/screen/car_entry.dart';
 import 'package:car_entry_exit/services/authentication.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,29 @@ class _DashboardScreenState extends State<DashboardScreen>
     return Scaffold(
       appBar: AppBar(title: Text("Dashbord")),
       body: Container(
+        padding: EdgeInsets.all(15.0),
         child: Stack(
           children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CarEntry()));
+                  },
+                  splashColor: Colors.deepPurple,
+                  //backgroundColor: Colors.pinkAccent,
+
+                  highlightColor: Colors.deepPurple,
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text('Entry Car', style: TextStyle(fontSize: 20)),
+                ),
+              ],
+            ),
             Center(child: Text('Dashbord Page')),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:car_entry_exit/screen/car_entry.dart';
 import 'package:car_entry_exit/screen/dashboard.dart';
 import 'package:car_entry_exit/screen/root_page.dart';
 import 'package:car_entry_exit/screen/transition_route_observer.dart';
@@ -69,10 +70,11 @@ class MyApp extends StatelessWidget {
       //home: LoginScreen(),
       home: new RootPage(auth: new Auth()),
       navigatorObservers: [TransitionRouteObserver()],
-      routes: {
-        LoginScreen.routeName: (context) => LoginScreen(),
-        DashboardScreen.routeName: (context) => DashboardScreen(),
-      },
+      // routes: {
+      //   LoginScreen.routeName: (context) => LoginScreen(),
+      //   DashboardScreen.routeName: (context) => DashboardScreen(),
+      //   CarEntry.routeName: (context) => CarEntry(),
+      // },
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
