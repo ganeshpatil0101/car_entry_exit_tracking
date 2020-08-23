@@ -41,7 +41,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 RaisedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CarEntry()));
+                        MaterialPageRoute(builder: (context) => CarEntry(db)));
                   },
                   splashColor: Colors.deepPurple,
                   //backgroundColor: Colors.pinkAccent,
@@ -50,7 +50,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text('Entry Car', style: TextStyle(fontSize: 20)),
+                  child: Text('Car Entry', style: TextStyle(fontSize: 20)),
                 ),
                 Scrollbar(
                   child: ListView(
@@ -64,7 +64,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 )
               ],
             ),
-            Center(child: Text('Dashbord Page')),
           ],
         ),
       ),

@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 class CarEntryItem extends StatelessWidget {
   final Key key;
   final CarEntryData ce;
-  CarEntryItem(this.ce) : key = ObjectKey(ce);
+  final int index;
+  CarEntryItem(this.ce, this.index) : key = ObjectKey(ce);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color:  (index % 2 == 0) ? Colors.white : Colors.black12,
       child: Row(
         children: <Widget>[
           Flexible(
@@ -22,6 +23,8 @@ class CarEntryItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("KmIn : ${ce.kmIn}"),
+                    Text("Date In:${ce.dateIn}"),
+                    Text("Model:${ce.model}")
                     //Text("NAV : ${mf.nav.toStringAsFixed(2)}")
                   ],
                 ),

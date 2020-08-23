@@ -28,10 +28,11 @@ class CarEntryListState extends State<CarEntryList> {
         List<DocumentSnapshot> snapshots = snapshot.data.documents;
         var totalInvested = 0.0;
         var currentValuation = 0.0;
+        var index = 0;
         var ch = snapshots.map((s) {
+          index++;
           CarEntryData ce = CarEntryData.fromSnapshot(s);
-          print(ce);
-          return CarEntryItem(ce);
+          return CarEntryItem(ce, index);
         });
 
         List<Widget> chw = [];

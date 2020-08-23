@@ -1,5 +1,7 @@
 import 'package:car_entry_exit/comman/dropdown.dart';
 import 'package:car_entry_exit/comman/input_formatter.dart';
+import 'package:car_entry_exit/modal/car_entry_data.dart';
+import 'package:car_entry_exit/services/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 // Reg Num
@@ -9,18 +11,23 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 // Type of service drop down
 
 class CarEntry extends StatefulWidget {
+  CarEntry(this.db);
   static const routeName = '/car_entry';
+  final FirebaseDatabse db;
+
   @override
-  _CarEntryState createState() => _CarEntryState();
+  _CarEntryState createState() => _CarEntryState(db);
 }
 
 class _CarEntryState extends State<CarEntry> {
+  _CarEntryState(this.db);
+  final FirebaseDatabse db;
   String carModelValue = 'Select Model';
   String typeOfService = 'Type of Service';
   var now = new DateTime.now();
-  var carRegiNumController = TextEditingController(),
-      dateTimeInController = TextEditingController(),
-      kmInController = TextEditingController();
+  var dateTimeInController = TextEditingController(),
+      kmInController = TextEditingController(),
+      commentController = TextEditingController();
   var maskedCarRegNumCtrl = new MaskedTextController(mask: 'AA-00-AA-0000');
 
   @override
@@ -31,6 +38,7 @@ class _CarEntryState extends State<CarEntry> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Car Entry"),
@@ -46,6 +54,7 @@ class _CarEntryState extends State<CarEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.name,
                 controller: maskedCarRegNumCtrl,
+                onFieldSubmitted: (String a) { FocusScope.of(context).nextFocus();},
                 decoration: InputDecoration(
                   hintText: "Registration Number",
                   labelText: "Registration Number",
@@ -58,6 +67,7 @@ class _CarEntryState extends State<CarEntry> {
               child: TextFormField(
                 controller: dateTimeInController,
                 enabled: false,
+                onFieldSubmitted: (String a) { FocusScope.of(context).nextFocus();},
                 decoration: InputDecoration(
                   hintText: "In Date Time",
                   labelText: "In Date Time",
@@ -77,12 +87,13 @@ class _CarEntryState extends State<CarEntry> {
                 },
                 options: [
                   'Select Model',
-                  'Honda',
-                  'Maruti Suzuki',
-                  'Mahindra',
-                  'Kia',
-                  'Hundai',
-                  'Nexa'
+                  'Santro',
+                  'Verena',
+                  'Creta',
+                  'Accent',
+                  'Elantra',
+                  'i20',
+                  'Eon'
                 ],
               ),
             ),
@@ -114,11 +125,30 @@ class _CarEntryState extends State<CarEntry> {
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
+                controller: commentController,
+                keyboardType: TextInputType.multiline,
+                inputFormatters: [],
+                decoration: InputDecoration(
+                  hintText: "Comment",
+                  labelText: "Comments:",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: RaisedButton(
                 onPressed: () {
                   print('REg NUm ');
-                  //print(carRegiNumController.text);
-                  print(maskedCarRegNumCtrl.text);
+                  var datein = dateTimeInController.text;
+                  var kmIn =  int.parse(kmInController.text);
+                  var comment = commentController.text;
+                  var regnum = maskedCarRegNumCtrl.text;
+
+                  CarEntryData data = new CarEntryData(regNum: regnum, kmIn: kmIn, dateIn: datein, createdDate: datein, createdBy: "dunny", comment: comment, model: carModelValue, serviceType: typeOfService);
+                  widget.db.addCarEntry(data);
+                  Navigator.pop(context);
                 },
                 splashColor: Colors.deepPurple,
                 highlightColor: Colors.deepPurple,
