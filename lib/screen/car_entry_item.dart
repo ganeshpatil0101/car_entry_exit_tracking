@@ -22,9 +22,10 @@ class CarEntryItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("KmIn : ${ce.kmIn}"),
-                    Text("Date In:${ce.dateIn}"),
-                    Text("Model:${ce.model}")
+                    Text("Model : ${ce.model}"),
+                    Text("Service Type: ${ce.serviceType}"),
+                    Text("Comment: ${ce.comment}" )
+
                     //Text("NAV : ${mf.nav.toStringAsFixed(2)}")
                   ],
                 ),
@@ -38,7 +39,30 @@ class CarEntryItem extends StatelessWidget {
                       // Navigator.pushNamed(context, AddEditMfPage.route,
                       //     arguments: EditMfPageArgs(mf)),
                     }),
-          ),
+          ), Flexible(
+            child: ListTile(
+                contentPadding: EdgeInsets.only(bottom: 10),
+                title: Text(ce.dateIn),
+                subtitle: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("KmIn : ${ce.kmIn}"),
+
+                    //Text("NAV : ${mf.nav.toStringAsFixed(2)}")
+                  ],
+                ),
+                //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
+                // trailing: VisualizedAmount(
+                //   amount: mf.curValue - mf.amtInvstd,
+                //   income: (mf.curValue - mf.amtInvstd < 0) ? false : true,
+                // ),
+                onTap: () => {
+                  print('Navigate to exit page')
+                  // Navigator.pushNamed(context, AddEditMfPage.route,
+                  //     arguments: EditMfPageArgs(mf)),
+                }),
+          )
         ],
       ),
     );

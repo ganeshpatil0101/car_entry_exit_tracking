@@ -38,7 +38,8 @@ class CarEntryData {
       createdDate: json['createdDate'],
       createdBy: json['createdBy'],
         model: json['model'],
-       serviceType:json["serviceType"]
+       serviceType:json["servicetype"],
+       comment:json["comment"]
     );
   }
 
@@ -51,7 +52,8 @@ class CarEntryData {
       createdDate: json['createdDate'],
       createdBy: json['createdBy'],
       model: json['model'],
-      serviceType:json["serviceType"]
+      serviceType:json["servicetype"],
+      comment:json["comment"]
     );
   }
 
@@ -62,7 +64,8 @@ class CarEntryData {
       'createdDate': instance.createdDate,
       'createdBy': instance.createdBy,
       'servicetype':instance.serviceType,
-      'model':instance.model
+      'model':instance.model,
+      'comment':instance.comment
     };
     return map;
   }
