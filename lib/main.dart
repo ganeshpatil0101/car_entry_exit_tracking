@@ -41,10 +41,11 @@ class MyApp extends StatelessWidget {
           ),
           display4: TextStyle(fontFamily: 'Quicksand'),
           display3: TextStyle(fontFamily: 'Quicksand'),
-          display1: TextStyle(fontFamily: 'Quicksand'),
+          display1: TextStyle(
+              fontFamily: 'Quicksand', fontSize: 30.0, color: Colors.black87),
           headline: TextStyle(fontFamily: 'NotoSans'),
           title: TextStyle(fontFamily: 'NotoSans'),
-          subhead: TextStyle(fontFamily: 'NotoSans'),
+          subhead: TextStyle(fontFamily: 'NotoSans', fontSize: 16.0),
           body2: TextStyle(fontFamily: 'NotoSans'),
           body1: TextStyle(fontFamily: 'NotoSans'),
           subtitle: TextStyle(fontFamily: 'NotoSans'),

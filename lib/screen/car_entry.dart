@@ -41,16 +41,36 @@ class _CarEntryState extends State<CarEntry> {
           shrinkWrap: true,
           padding: EdgeInsets.all(8.0),
           children: <Widget>[
+            // Padding(
+            //   padding: const EdgeInsets.all(16.0),
+            //   child: TextFormField(
+            //     keyboardType: TextInputType.name,
+            //     controller: maskedCarRegNumCtrl,
+            //     decoration: InputDecoration(
+            //       hintText: "Registration Number",
+            //       labelText: "Registration Number",
+            //       border: OutlineInputBorder(),
+            //     ),
+            //   ),
+            // ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextFormField(
-                keyboardType: TextInputType.name,
-                controller: maskedCarRegNumCtrl,
-                decoration: InputDecoration(
-                  hintText: "Registration Number",
-                  labelText: "Registration Number",
-                  border: OutlineInputBorder(),
-                ),
+              padding: const EdgeInsets.all(10),
+              child: Text("Registration Number"),
+            ),
+            Container(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  countryCode(),
+                  otpNumberWidget(0),
+                  otpNumberWidget(1),
+                  otpNumberWidget(2),
+                  otpNumberWidget(3),
+                  //otpNumberWidget(4),
+                  //otpNumberWidget(5),
+                ],
               ),
             ),
             Padding(
@@ -131,6 +151,41 @@ class _CarEntryState extends State<CarEntry> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget countryCode() {
+    return Container(
+      height: 40,
+      width: 80,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black, width: 0),
+          borderRadius: const BorderRadius.all(Radius.circular(8))),
+      child: Center(
+          child: TextFormField(
+        keyboardType: TextInputType.name,
+        textCapitalization: TextCapitalization.sentences,
+        controller: carRegiNumController,
+        decoration: InputDecoration(
+          hintText: "MH",
+          border: OutlineInputBorder(),
+        ),
+      )),
+    );
+  }
+
+  Widget otpNumberWidget(int position) {
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black, width: 0),
+          borderRadius: const BorderRadius.all(Radius.circular(8))),
+      child: Center(
+          child: Text(
+        "${position}",
+        style: TextStyle(color: Colors.black),
+      )),
     );
   }
 }

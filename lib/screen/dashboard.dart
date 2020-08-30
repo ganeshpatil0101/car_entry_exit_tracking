@@ -64,7 +64,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 )
               ],
             ),
-            Center(child: Text('Dashbord Page')),
           ],
         ),
       ),

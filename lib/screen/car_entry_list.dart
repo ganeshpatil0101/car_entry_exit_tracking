@@ -76,7 +76,7 @@ class CarEntryListState extends State<CarEntryList> {
           child: ListView(
             physics: BouncingScrollPhysics(),
             shrinkWrap: true,
-            padding: EdgeInsets.all(8.0),
+            //padding: EdgeInsets.all(2.0),
             children: chw, //TODO
             dragStartBehavior: DragStartBehavior.start,
           ),
