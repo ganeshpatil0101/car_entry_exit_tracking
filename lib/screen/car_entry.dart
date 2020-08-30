@@ -1,6 +1,6 @@
 import 'package:car_entry_exit/comman/dropdown.dart';
 import 'package:car_entry_exit/comman/input_formatter.dart';
-import 'package:car_entry_exit/modal/car_entry_data.dart';
+import 'package:car_entry_exit/model/car_entry_data.dart';
 import 'package:car_entry_exit/services/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -141,12 +141,12 @@ class _CarEntryState extends State<CarEntry> {
               child: RaisedButton(
                 onPressed: () {
                   print('REg NUm ');
-                  var datein = dateTimeInController.text;
+                  var dateIn = dateTimeInController.text;
                   var kmIn =  int.parse(kmInController.text);
                   var comment = commentController.text;
-                  var regnum = maskedCarRegNumCtrl.text;
+                  var regNum = maskedCarRegNumCtrl.text;
 
-                  CarEntryData data = new CarEntryData(regNum: regnum, kmIn: kmIn, dateIn: datein, createdDate: datein, createdBy: "dunny", comment: comment, model: carModelValue, serviceType: typeOfService);
+                  CarEntryData data = new CarEntryData(regNum: regNum, kmIn: kmIn, dateIn: dateIn, createdDate: dateIn, createdBy: "dunny", comment: comment, model: carModelValue, serviceType: typeOfService, status:"IN");
                   widget.db.addCarEntry(data);
                   Navigator.pop(context);
                 },

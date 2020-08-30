@@ -1,4 +1,4 @@
-import 'package:car_entry_exit/modal/car_entry_data.dart';
+import 'package:car_entry_exit/model/car_entry_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseDatabse {

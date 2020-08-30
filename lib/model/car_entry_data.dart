@@ -14,6 +14,10 @@ class CarEntryData {
   final String model;
   final String serviceType;
   DocumentReference reference;
+  final String status;
+  int kmOut;
+  String outDate;
+
 
   CarEntryData({@required this.regNum,
     @required this.kmIn,
@@ -22,7 +26,11 @@ class CarEntryData {
     @required this.createdBy,
     @required this.comment,
     @required this.model,
-    @required this.serviceType});
+    @required this.serviceType,
+    @required this.status,
+    this.kmOut,
+    this.outDate
+  });
 
   static fromSnapshot(DocumentSnapshot document) {
     CarEntryData data = CarEntryData.fromJson(document.data);
@@ -39,7 +47,10 @@ class CarEntryData {
       createdBy: json['createdBy'],
         model: json['model'],
        serviceType:json["servicetype"],
-       comment:json["comment"]
+       comment:json["comment"],
+       status: json["status"],
+       kmOut: json["kmOut"],
+       outDate: json["outDate"]
     );
   }
 
@@ -53,7 +64,11 @@ class CarEntryData {
       createdBy: json['createdBy'],
       model: json['model'],
       serviceType:json["servicetype"],
-      comment:json["comment"]
+      comment:json["comment"],
+      status: json["status"],
+        kmOut: json["kmOut"],
+        outDate: json["outDate"]
+
     );
   }
 
@@ -65,7 +80,10 @@ class CarEntryData {
       'createdBy': instance.createdBy,
       'servicetype':instance.serviceType,
       'model':instance.model,
-      'comment':instance.comment
+      'comment':instance.comment,
+      'status': instance.status,
+      'kmOut': instance.kmOut,
+      'outDate': instance.outDate
     };
     return map;
   }

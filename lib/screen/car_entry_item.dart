@@ -1,6 +1,10 @@
-import 'package:car_entry_exit/modal/car_entry_data.dart';
+import 'package:car_entry_exit/model/car_entry_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:car_entry_exit/services/firebase_database.dart';
+
+import 'car_exit.dart';
 
 class CarEntryItem extends StatelessWidget {
   final Key key;
@@ -11,58 +15,92 @@ class CarEntryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:  (index % 2 == 0) ? Colors.white : Colors.black12,
+      color:  Colors.white ,
       child: Row(
         children: <Widget>[
           Flexible(
-            child: ListTile(
-                contentPadding: EdgeInsets.only(bottom: 10),
-                title: Text(ce.regNum),
-                subtitle: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text("Model : ${ce.model}"),
-                    Text("Service Type: ${ce.serviceType}"),
-                    Text("Comment: ${ce.comment}" )
+            child: Card(
+                child: ListTile(
+                    contentPadding:
+                    EdgeInsets.only(bottom: 1, top: 1, left: 10, right: 10),
+                    title: Text(
+                      ce.regNum,
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .display1,
+                    ),
+                    subtitle: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 10),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Date In : ",
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .subhead,
+                              ),
+                              Text(
+                                "${new DateFormat().format(DateTime.parse(ce.dateIn))}",
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .display4,
+                              ),
+                            ]),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Creta123456",
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .display4,
+                              ),
+                              Text(
+                                "KmIn :${ce.kmIn}",
+                                style: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .subhead,
+                              ),
+                            ]),
+                        SizedBox(width: 5),
+                        Text(
+                          "Service Type : Servicing",
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .subhead,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          "Comment : NA",
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .subhead,
+                        )
+                      ],
+                    ),
 
-                    //Text("NAV : ${mf.nav.toStringAsFixed(2)}")
-                  ],
-                ),
-                //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
-                // trailing: VisualizedAmount(
-                //   amount: mf.curValue - mf.amtInvstd,
-                //   income: (mf.curValue - mf.amtInvstd < 0) ? false : true,
-                // ),
-                onTap: () => {
-                      print('Navigate to exit page')
+                    //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
+                    //trailing: Icon(Icons.arrow_right),
+                    onTap: () =>
+                    {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) =>
+                              CarExit(new FirebaseDatabse(), ce)))
                       // Navigator.pushNamed(context, AddEditMfPage.route,
                       //     arguments: EditMfPageArgs(mf)),
-                    }),
-          ), Flexible(
-            child: ListTile(
-                contentPadding: EdgeInsets.only(bottom: 10),
-                title: Text(ce.dateIn),
-                subtitle: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text("KmIn : ${ce.kmIn}"),
-
-                    //Text("NAV : ${mf.nav.toStringAsFixed(2)}")
-                  ],
-                ),
-                //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
-                // trailing: VisualizedAmount(
-                //   amount: mf.curValue - mf.amtInvstd,
-                //   income: (mf.curValue - mf.amtInvstd < 0) ? false : true,
-                // ),
-                onTap: () => {
-                  print('Navigate to exit page')
-                  // Navigator.pushNamed(context, AddEditMfPage.route,
-                  //     arguments: EditMfPageArgs(mf)),
-                }),
-          )
+                    })),
+          ),
         ],
       ),
     );
