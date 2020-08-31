@@ -26,59 +26,20 @@ class CarEntryListState extends State<CarEntryList> {
           return PaddedCircularProgressIndicator();
         }
         List<DocumentSnapshot> snapshots = snapshot.data.documents;
-        var totalInvested = 0.0;
-        var currentValuation = 0.0;
         var index = 0;
         var ch = snapshots.map((s) {
           index++;
           CarEntryData ce = CarEntryData.fromSnapshot(s);
-          return CarEntryItem(ce, index);
+          return CarEntryItem(ce, index, widget.db);
         });
 
         List<Widget> chw = [];
         chw.addAll(ch);
-        var greenStyle = TextStyle(
-            fontSize: 21.0, fontWeight: FontWeight.w500, color: Colors.green);
-        var redStyle = TextStyle(
-            fontSize: 21.0, fontWeight: FontWeight.w500, color: Colors.red);
-        // chw.insert(
-        //     0,
-        //     Container(
-        //       padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
-        //       child: Column(
-        //           crossAxisAlignment: CrossAxisAlignment.stretch,
-        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //           children: <Widget>[
-        //             Row(
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //                 children: <Widget>[
-        //                   Text("Total Invested",
-        //                       style: Theme.of(context).textTheme.display1),
-        //                   Text("Total Valuation",
-        //                       style: Theme.of(context).textTheme.display1),
-        //                 ]),
-        //             Row(
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //                 children: <Widget>[
-        //                   Text(totalInvested.toStringAsFixed(2),
-        //                       style: Theme.of(context).textTheme.display1),
-        //                   Text(
-        //                     currentValuation.toStringAsFixed(2),
-        //                     style:
-        //                         (currentValuation < 0) ? redStyle : greenStyle,
-        //                   )
-        //                 ]),
-        //           ]),
-        //     ));
-
         return Scrollbar(
           child: ListView(
             physics: BouncingScrollPhysics(),
             shrinkWrap: true,
-            padding: EdgeInsets.all(8.0),
-            children: chw, //TODO
+            children: chw,
             dragStartBehavior: DragStartBehavior.start,
           ),
         );

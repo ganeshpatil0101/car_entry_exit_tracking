@@ -5,21 +5,26 @@ class FirebaseDatabse {
   static Firestore _db = Firestore.instance;
 
   final CollectionReference carEntryList;
+  final CollectionReference carExitList;
   final CollectionReference serviceTypes;
   final CollectionReference models;
-
-  FirebaseDatabse() : this.carEntryList = _db.collection("Vehicles"),
-  serviceTypes = _db.collection("servicetype"),models = _db.collection("models");
-
+  final userId;
+  FirebaseDatabse(String userId)
+      : this.carEntryList = _db.collection("Vehicles"),
+        this.carExitList = _db.collection("VehiclesExit"),
+        serviceTypes = _db.collection("servicetype"),
+        models = _db.collection("models"),
+        this.userId = userId;
 
   Future<QuerySnapshot> getCarEntryList() async {
     return carEntryList.getDocuments();
   }
 
- Future<List<DocumentSnapshot>> getModels() async {
-    QuerySnapshot modelTypes =  await models.getDocuments();
+  Future<List<DocumentSnapshot>> getModels() async {
+    QuerySnapshot modelTypes = await models.getDocuments();
     return modelTypes.documents;
   }
+
   Future<QuerySnapshot> getServiceTypes() async {
     return await serviceTypes.getDocuments();
   }
@@ -28,11 +33,16 @@ class FirebaseDatabse {
     return carEntryList.orderBy('datein', descending: true).snapshots();
   }
 
-
   Future<DocumentReference> addCarEntry(CarEntryData carEntryData) {
     return carEntryList.add(carEntryData.toJson(carEntryData));
   }
 
+  Future<DocumentReference> exitCar(CarEntryData carExitData) {
+    // TODO remove entry from Vehicle collection
+    return carEntryList.add(carExitData.toJson(carExitData));
+  }
 
-
+  String getUserId() {
+    return this.userId;
+  }
 }
