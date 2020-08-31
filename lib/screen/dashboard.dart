@@ -18,8 +18,13 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen>
     with SingleTickerProviderStateMixin, TransitionRouteAware {
-  FirebaseDatabse db = new FirebaseDatabse();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  FirebaseDatabse db;
+  initState() {
+    print("===>initState ");
+    print(widget.userId);
+    db = new FirebaseDatabse(widget.userId);
+  }
+
   Future _logOutUser() async {
     await widget.auth.signOut();
     print('Logout successfully ....');
@@ -29,53 +34,42 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key:_scaffoldKey,
       appBar: AppBar(title: Text("Dashbord")),
-      body: Container(
-        padding: EdgeInsets.all(15.0),
-        child: Stack(
-          overflow: Overflow.visible,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                RaisedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CarEntry(db)));
-                  },
-                  splashColor: Colors.deepPurple,
-                  //backgroundColor: Colors.pinkAccent,
-
-                  highlightColor: Colors.deepPurple,
-                  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text('Car Entry', style: TextStyle(fontSize: 20)),
-                ),
-                Scrollbar(
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: EdgeInsets.all(8.0),
-                    children: <Widget>[
-                      CarEntryList(db),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => CarEntry(db)));
+                    },
+                    splashColor: Colors.deepPurple,
+                    color: Colors.deepPurpleAccent,
+                    highlightColor: Colors.deepPurple,
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text('Car Entry', style: TextStyle(fontSize: 20)),
+                  )),
+              ListView(
+                physics: BouncingScrollPhysics(),
+                shrinkWrap: true,
+                padding: EdgeInsets.fromLTRB(15.0, 5, 15, 15),
+                children: <Widget>[
+                  CarEntryList(db),
+                ],
+              ),
+            ],
+          )),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
         // space to fit everything.
-        child:SizedBox(
-    height:  MediaQuery.of(context).size.height,
-            child:ListView(
+        child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -101,7 +95,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               },
             ),
           ],
-        )),
+        ),
       ),
     );
   }

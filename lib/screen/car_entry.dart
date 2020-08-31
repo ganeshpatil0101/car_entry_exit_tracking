@@ -40,11 +40,11 @@ class _CarEntryState extends State<CarEntry> {
 
   @override
   Widget build(BuildContext context) {
-
     return Form(
         key: _formKey,
         child: Scaffold(
           key: _scaffoldKey1,
+
       appBar: AppBar(
         title: Text("Car Entry"),
       ),
@@ -59,7 +59,9 @@ class _CarEntryState extends State<CarEntry> {
               child: TextFormField(
                 keyboardType: TextInputType.name,
                 controller: maskedCarRegNumCtrl,
-                onFieldSubmitted: (String a) { FocusScope.of(context).nextFocus();},
+                onFieldSubmitted: (String a) {
+                  FocusScope.of(context).nextFocus();
+                },
                 decoration: InputDecoration(
                   hintText: "Registration Number",
                   labelText: "Registration Number",
@@ -78,7 +80,9 @@ class _CarEntryState extends State<CarEntry> {
               child: TextFormField(
                 controller: dateTimeInController,
                 enabled: false,
-                onFieldSubmitted: (String a) { FocusScope.of(context).nextFocus();},
+                onFieldSubmitted: (String a) {
+                  FocusScope.of(context).nextFocus();
+                },
                 decoration: InputDecoration(
                   hintText: "In Date Time",
                   labelText: "In Date Time",
@@ -164,7 +168,7 @@ class _CarEntryState extends State<CarEntry> {
                    var kmIn =  int.parse(kmInController.text);
                    var comment = commentController.text;
                    var regNum = maskedCarRegNumCtrl.text;
-
+                  var userID = widget.db.getUserId();
                    if(carModelValue== null || carModelValue.isEmpty || carModelValue == 'Select Model'){
 
                      _scaffoldKey1.currentState.showSnackBar(SnackBar(content: Text('Please select Model of the car')));
@@ -175,8 +179,8 @@ class _CarEntryState extends State<CarEntry> {
                          kmIn: kmIn,
                          dateIn: dateIn,
                          createdDate: dateIn,
-                         createdBy: "dunny",
-                         comment: comment,
+                         createdBy: userID,
+                  carInComment: comment,
                          model: carModelValue,
                          serviceType: typeOfService,
                          status: "IN");

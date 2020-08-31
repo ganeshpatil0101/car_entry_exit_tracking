@@ -12,19 +12,16 @@ import 'package:intl/intl.dart';
 // Type of service drop down
 
 class CarExit extends StatefulWidget {
-  CarExit(this.db, this._carEntryData );
+  CarExit(this._carEntryData, this.db);
   static const routeName = '/car_exit';
   final FirebaseDatabse db;
-
   final CarEntryData _carEntryData;
 
   @override
-  _CarExitState createState() => _CarExitState(db);
+  _CarExitState createState() => _CarExitState();
 }
 
 class _CarExitState extends State<CarExit> {
-  _CarExitState(this.db);
-  final FirebaseDatabse db;
   String carModelValue = 'Select Model';
   String typeOfService = 'Type of Service';
   var now = new DateTime.now();
@@ -40,7 +37,6 @@ class _CarExitState extends State<CarExit> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Car Exit"),
@@ -51,90 +47,61 @@ class _CarExitState extends State<CarExit> {
           shrinkWrap: true,
           padding: EdgeInsets.all(8.0),
           children: <Widget>[
-
-        ListTile(
-        contentPadding:
-        EdgeInsets.only(bottom: 1, top: 1, left: 10, right: 10),
-          title: Text(
-            widget._carEntryData.regNum,
-            style: Theme
-                .of(context)
-                .textTheme
-                .display1,
-          ),
-          subtitle: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(width: 10),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.start ,
-                  children: [
+            ListTile(
+              contentPadding:
+                  EdgeInsets.only(bottom: 1, top: 1, left: 10, right: 10),
+              title: Text(
+                widget._carEntryData.regNum,
+                style: Theme.of(context).textTheme.display1,
+              ),
+              subtitle: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Text(
                       "Date In : ",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .display4,
+                      style: Theme.of(context).textTheme.display4,
                     ),
                     Text(
-                      "${new DateFormat().format(DateTime.parse(widget._carEntryData.dateIn))}",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .display4,
+                      "${new DateFormat('dd-MM-yyyy kk:mm').format(DateTime.parse(widget._carEntryData.dateIn))}",
+                      style: Theme.of(context).textTheme.display4,
                     ),
                   ]),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Model:" + widget._carEntryData.model,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .display4,
-                    ),
-                    Text(
-                      "Km In: ${widget._carEntryData.kmIn}",
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .display4,
-                    ),
-                  ]),
-              SizedBox(width: 5),
-              Text(
-                "Service Type: " + widget._carEntryData.serviceType,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .display4,
+                  SizedBox(height: 10),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Model:" + widget._carEntryData.model,
+                          style: Theme.of(context).textTheme.display4,
+                        ),
+                        Text(
+                          "Km In: ${widget._carEntryData.kmIn}",
+                          style: Theme.of(context).textTheme.display4,
+                        ),
+                      ]),
+                  SizedBox(height: 10),
+                  Text(
+                    "Service Type: " + widget._carEntryData.serviceType,
+                    style: Theme.of(context).textTheme.display4,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Comment: " + widget._carEntryData.carInComment,
+                    style: Theme.of(context).textTheme.display4,
+                  )
+                ],
               ),
-              SizedBox(width: 5),
-              Text(
-                "Comment: " + widget._carEntryData.comment,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .display4,
-              )
-            ],
-          ),
-
-          //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
-          //trailing: Icon(Icons.arrow_right),
-          onTap: () =>
-          {
-
-            // Navigator.pushNamed(context, AddEditMfPage.route,
-            //     arguments: EditMfPageArgs(mf)),
-          }),
+            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextFormField(
                 controller: dateTimeOutController,
-                onFieldSubmitted: (String a) { FocusScope.of(context).nextFocus();},
+                onFieldSubmitted: (String a) {
+                  FocusScope.of(context).nextFocus();
+                },
                 decoration: InputDecoration(
                   hintText: "Out Date Time",
                   labelText: "Out Date Time",
@@ -142,9 +109,19 @@ class _CarExitState extends State<CarExit> {
                 ),
               ),
             ),
-
-
-
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
+                controller: kmOutController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [DecimalInputFormatter()],
+                decoration: InputDecoration(
+                  hintText: "Kilometer Out",
+                  labelText: "Kilometer Out",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextFormField(
@@ -152,9 +129,8 @@ class _CarExitState extends State<CarExit> {
                 keyboardType: TextInputType.multiline,
                 inputFormatters: [],
                 decoration: InputDecoration(
-                  hintText: "Comment",
-                  labelText: "Comments",
-
+                  hintText: "Exit Comment",
+                  labelText: "Exit Comments",
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -163,15 +139,30 @@ class _CarExitState extends State<CarExit> {
               padding: const EdgeInsets.all(16.0),
               child: RaisedButton(
                 onPressed: () {
+                  var dateOut = dateTimeOutController.text;
+                  var kmOut = int.parse(kmOutController.text);
+                  var carExtComment = outCommentController.text;
+                  var userID = widget.db.getUserId();
 
-                  var datein = dateTimeOutController.text;
-                  var kmIn =  int.parse(kmOutController.text);
-                  var comment = outCommentController.text;
+                  CarEntryData data = new CarEntryData(
+                      outDate: dateOut,
+                      kmOut: kmOut,
+                      carExitComment: carExtComment,
+                      carExitBy: userID,
+                      status: "OUT",
+                      regNum: widget._carEntryData.regNum,
+                      kmIn: widget._carEntryData.kmIn,
+                      dateIn: widget._carEntryData.dateIn,
+                      createdDate: widget._carEntryData.createdDate,
+                      createdBy: widget._carEntryData.createdBy,
+                      carInComment: widget._carEntryData.dateIn,
+                      model: widget._carEntryData.model,
+                      serviceType: widget._carEntryData.serviceType);
 
-
-                  CarEntryData data = new CarEntryData(regNum: widget._carEntryData.regNum, kmIn: kmIn, dateIn: datein, createdDate: datein, createdBy: "dunny", comment: comment, model: carModelValue, serviceType: typeOfService);
-                  widget.db.addCarEntry(data);
-                  Navigator.pop(context);
+                  widget.db
+                      .exitCar(data)
+                      .then((value) => {Navigator.pop(context)})
+                      .catchError((err) => {showDialog(context: err)});
                 },
                 splashColor: Colors.deepPurple,
                 highlightColor: Colors.deepPurple,

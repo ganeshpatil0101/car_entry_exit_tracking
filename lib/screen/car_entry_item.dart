@@ -10,25 +10,26 @@ class CarEntryItem extends StatelessWidget {
   final Key key;
   final CarEntryData ce;
   final int index;
-  CarEntryItem(this.ce, this.index) : key = ObjectKey(ce);
+  final FirebaseDatabse db;
+  CarEntryItem(this.ce, this.index, this.db) : key = ObjectKey(ce);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:  Colors.white ,
       child: Row(
         children: <Widget>[
           Flexible(
             child: Card(
+                color: (index % 2 == 0)
+                    ? Colors.white
+                    : Color.fromRGBO(192, 192, 192, 0.01),
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: ListTile(
                     contentPadding:
-                    EdgeInsets.only(bottom: 1, top: 1, left: 10, right: 10),
+                        EdgeInsets.only(bottom: 5, top: 5, left: 5, right: 5),
                     title: Text(
                       ce.regNum,
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .display1,
+                      style: Theme.of(context).textTheme.display1,
                     ),
                     subtitle: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -40,66 +41,48 @@ class CarEntryItem extends StatelessWidget {
                             children: [
                               Text(
                                 "Date In : ",
-                                style: Theme
-                                    .of(context)
-                                    .textTheme
-                                    .subhead,
+                                style: Theme.of(context).textTheme.subhead,
                               ),
                               Text(
-                                "${new DateFormat().format(DateTime.parse(ce.dateIn))}",
-                                style: Theme
-                                    .of(context)
-                                    .textTheme
-                                    .display4,
+                                "${new DateFormat('dd-MM-yyyy kk:mm').format(DateTime.parse(ce.dateIn))}",
+                                style: Theme.of(context).textTheme.display4,
                               ),
                             ]),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Creta123456",
-                                style: Theme
-                                    .of(context)
-                                    .textTheme
-                                    .display4,
+                                "${ce.model}",
+                                style: Theme.of(context).textTheme.display4,
                               ),
                               Text(
                                 "KmIn :${ce.kmIn}",
-                                style: Theme
-                                    .of(context)
-                                    .textTheme
-                                    .subhead,
+                                style: Theme.of(context).textTheme.subhead,
                               ),
                             ]),
                         SizedBox(width: 5),
                         Text(
-                          "Service Type : Servicing",
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .subhead,
+                          "Service Type : ${ce.serviceType}",
+                          style: Theme.of(context).textTheme.subhead,
                         ),
                         SizedBox(width: 5),
                         Text(
-                          "Comment : NA",
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .subhead,
+                          "Comment : ${ce.carInComment}",
+                          style: Theme.of(context).textTheme.subhead,
                         )
                       ],
                     ),
 
                     //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
                     //trailing: Icon(Icons.arrow_right),
-                    onTap: () =>
-                    {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) =>
-                              CarExit(new FirebaseDatabse(), ce)))
-                      // Navigator.pushNamed(context, AddEditMfPage.route,
-                      //     arguments: EditMfPageArgs(mf)),
-                    })),
+                    onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CarExit(ce, db)))
+                          // Navigator.pushNamed(context, AddEditMfPage.route,
+                          //     arguments: EditMfPageArgs(mf)),
+                        })),
           ),
         ],
       ),
