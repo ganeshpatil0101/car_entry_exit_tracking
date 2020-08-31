@@ -17,6 +17,8 @@ class CarEntryList extends StatefulWidget {
 }
 
 class CarEntryListState extends State<CarEntryList> {
+  var scrollScontroller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -74,13 +76,17 @@ class CarEntryListState extends State<CarEntryList> {
         //     ));
 
         return Scrollbar(
-          child: ListView(
+          controller: scrollScontroller,
+          isAlwaysShown: true,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: ListView(
             physics: BouncingScrollPhysics(),
-            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
             padding: EdgeInsets.all(8.0),
             children: chw, //TODO
             dragStartBehavior: DragStartBehavior.start,
-          ),
+          )),
         );
       },
     );

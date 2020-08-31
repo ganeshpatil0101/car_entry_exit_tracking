@@ -22,6 +22,8 @@ class CarEntry extends StatefulWidget {
 class _CarEntryState extends State<CarEntry> {
   _CarEntryState(this.db);
   final FirebaseDatabse db;
+  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey1 = new GlobalKey<ScaffoldState>();
   String carModelValue = 'Select Model';
   String typeOfService = 'Type of Service';
   var now = new DateTime.now();
@@ -39,11 +41,14 @@ class _CarEntryState extends State<CarEntry> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return Form(
+        key: _formKey,
+        child: Scaffold(
+          key: _scaffoldKey1,
       appBar: AppBar(
         title: Text("Car Entry"),
       ),
-      body: Scrollbar(
+      body:Scrollbar(
         child: ListView(
           physics: BouncingScrollPhysics(),
           shrinkWrap: true,
@@ -60,6 +65,12 @@ class _CarEntryState extends State<CarEntry> {
                   labelText: "Registration Number",
                   border: OutlineInputBorder(),
                 ),
+                validator: (regnum){
+                  if(regnum == null || regnum.isEmpty){
+                    return "Please enter valid registration number";
+                  }
+                  return null;
+                },
               ),
             ),
             Padding(
@@ -108,6 +119,12 @@ class _CarEntryState extends State<CarEntry> {
                   labelText: "Kilometer In",
                   border: OutlineInputBorder(),
                 ),
+                validator: (kmIn){
+                  if(kmIn == null || kmIn.isEmpty){
+                    return "Please enter kilometer in";
+                  }
+                   return null;
+                },
               ),
             ),
             Padding(
@@ -141,14 +158,32 @@ class _CarEntryState extends State<CarEntry> {
               child: RaisedButton(
                 onPressed: () {
                   print('REg NUm ');
-                  var dateIn = dateTimeInController.text;
-                  var kmIn =  int.parse(kmInController.text);
-                  var comment = commentController.text;
-                  var regNum = maskedCarRegNumCtrl.text;
 
-                  CarEntryData data = new CarEntryData(regNum: regNum, kmIn: kmIn, dateIn: dateIn, createdDate: dateIn, createdBy: "dunny", comment: comment, model: carModelValue, serviceType: typeOfService, status:"IN");
-                  widget.db.addCarEntry(data);
-                  Navigator.pop(context);
+                 if(_formKey.currentState.validate()) {
+                   var dateIn = dateTimeInController.text;
+                   var kmIn =  int.parse(kmInController.text);
+                   var comment = commentController.text;
+                   var regNum = maskedCarRegNumCtrl.text;
+
+                   if(carModelValue== null || carModelValue.isEmpty || carModelValue == 'Select Model'){
+
+                     _scaffoldKey1.currentState.showSnackBar(SnackBar(content: Text('Please select Model of the car')));
+                   } else if( typeOfService == null || typeOfService.isEmpty || typeOfService == 'Type of Service'){
+                     _scaffoldKey1.currentState.showSnackBar(SnackBar(content: Text('Please select service type')));
+                   }else {
+                     CarEntryData data = new CarEntryData(regNum: regNum,
+                         kmIn: kmIn,
+                         dateIn: dateIn,
+                         createdDate: dateIn,
+                         createdBy: "dunny",
+                         comment: comment,
+                         model: carModelValue,
+                         serviceType: typeOfService,
+                         status: "IN");
+                     widget.db.addCarEntry(data);
+                     Navigator.pop(context);
+                   }
+                 }
                 },
                 splashColor: Colors.deepPurple,
                 highlightColor: Colors.deepPurple,
@@ -161,6 +196,6 @@ class _CarEntryState extends State<CarEntry> {
           ],
         ),
       ),
-    );
+    ));
   }
 }
