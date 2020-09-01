@@ -175,7 +175,7 @@ class _CarEntryState extends State<CarEntry> {
                    } else if( typeOfService == null || typeOfService.isEmpty || typeOfService == 'Type of Service'){
                      _scaffoldKey1.currentState.showSnackBar(SnackBar(content: Text('Please select service type')));
                    }else {
-                     CarEntryData data = new CarEntryData(regNum: regNum,
+                     CarEntryData data = new CarEntryData(regNum: regNum.toUpperCase(),
                          kmIn: kmIn,
                          dateIn: dateIn,
                          createdDate: dateIn,
