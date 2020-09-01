@@ -16,16 +16,16 @@ class CarExitData {
   DocumentReference reference;
   final String status;
 
-
-  CarExitData({@required this.regNum,
-    @required this.kmIn,
-    @required this.dateIn,
-    @required this.createdDate,
-    @required this.createdBy,
-    @required this.comment,
-    @required this.model,
-    @required this.serviceType,
-    @required this.status});
+  CarExitData(
+      {@required this.regNum,
+      @required this.kmIn,
+      @required this.dateIn,
+      @required this.createdDate,
+      @required this.createdBy,
+      @required this.comment,
+      @required this.model,
+      @required this.serviceType,
+      @required this.status});
 
   static fromSnapshot(DocumentSnapshot document) {
     CarExitData data = CarExitData.fromJson(document.data);
@@ -33,45 +33,42 @@ class CarExitData {
     return data;
   }
 
-  factory CarExitData.fromJson(Map<String, dynamic> json){
+  factory CarExitData.fromJson(Map<String, dynamic> json) {
     return CarExitData(
         regNum: json['regnum'],
         kmIn: json['kmIn'],
-        dateIn: json['datein'],
+        dateIn: json['dateIn'],
         createdDate: json['createdDate'],
         createdBy: json['createdBy'],
         model: json['model'],
-        serviceType:json["servicetype"],
-        comment:json["comment"],
-        status: json["status"]
-    );
+        serviceType: json["servicetype"],
+        comment: json["comment"],
+        status: json["status"]);
   }
 
-
-  factory CarExitData.toJson(Map<String, dynamic> json){
+  factory CarExitData.toJson(Map<String, dynamic> json) {
     return CarExitData(
         regNum: json['regnum'],
         kmIn: json['kmIn'],
-        dateIn: json['datein'],
+        dateIn: json['dateIn'],
         createdDate: json['createdDate'],
         createdBy: json['createdBy'],
         model: json['model'],
-        serviceType:json["servicetype"],
-        comment:json["comment"],
-        status: json["status"]
-
-    );
+        serviceType: json["servicetype"],
+        comment: json["comment"],
+        status: json["status"]);
   }
 
   Map<String, dynamic> toJson(CarExitData instance) {
-    Map<String, dynamic> map = {'regnum': instance.regNum,
+    Map<String, dynamic> map = {
+      'regnum': instance.regNum,
       'kmIn': instance.kmIn,
-      'datein': instance.dateIn,
+      'dateIn': instance.dateIn,
       'createdDate': instance.createdDate,
       'createdBy': instance.createdBy,
-      'servicetype':instance.serviceType,
-      'model':instance.model,
-      'comment':instance.comment,
+      'servicetype': instance.serviceType,
+      'model': instance.model,
+      'comment': instance.comment,
       'status': instance.status
     };
     return map;

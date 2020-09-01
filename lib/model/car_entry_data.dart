@@ -46,7 +46,7 @@ class CarEntryData {
     return CarEntryData(
         regNum: json['regnum'],
         kmIn: json['kmIn'],
-        dateIn: json['datein'],
+        dateIn: json['dateIn'],
         createdDate: json['createdDate'],
         createdBy: json['createdBy'],
         model: json['model'],
@@ -63,7 +63,7 @@ class CarEntryData {
     return CarEntryData(
         regNum: json['regnum'],
         kmIn: json['kmIn'],
-        dateIn: json['datein'],
+        dateIn: json['dateIn'],
         createdDate: json['createdDate'],
         createdBy: json['createdBy'],
         model: json['model'],
@@ -80,7 +80,7 @@ class CarEntryData {
     Map<String, dynamic> map = {
       'regnum': instance.regNum,
       'kmIn': instance.kmIn,
-      'datein': instance.dateIn,
+      'dateIn': instance.dateIn,
       'createdDate': instance.createdDate,
       'createdBy': instance.createdBy,
       'servicetype': instance.serviceType,

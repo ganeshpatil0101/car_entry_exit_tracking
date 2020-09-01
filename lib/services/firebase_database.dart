@@ -30,7 +30,17 @@ class FirebaseDatabse {
   }
 
   Stream<QuerySnapshot> getCarEntryListSnapshot() {
-    return carEntryList.orderBy('datein', descending: true).snapshots();
+    return carEntryList
+        .orderBy('dateIn', descending: true)
+        .where("status", isEqualTo: "IN")
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getCarExitListSnapshot() {
+    return carEntryList
+        .orderBy('outDate', descending: true)
+        .where("status", isEqualTo: "OUT")
+        .snapshots();
   }
 
   Future<DocumentReference> addCarEntry(CarEntryData carEntryData) {
