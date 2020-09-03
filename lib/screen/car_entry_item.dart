@@ -11,7 +11,9 @@ class CarEntryItem extends StatelessWidget {
   final CarEntryData ce;
   final int index;
   final FirebaseDatabse db;
-  CarEntryItem(this.ce, this.index, this.db) : key = ObjectKey(ce);
+  final isCarExit;
+  CarEntryItem(this.ce, this.index, this.db, this.isCarExit)
+      : key = ObjectKey(ce);
 
   @override
   Widget build(BuildContext context) {
@@ -72,16 +74,16 @@ class CarEntryItem extends StatelessWidget {
                         )
                       ],
                     ),
-
-                    //subtitle: MfItemDetails(mf.nav, mf.curValue, mf.amtInvstd),
-                    //trailing: Icon(Icons.arrow_right),
                     onTap: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CarExit(ce, db)))
-                          // Navigator.pushNamed(context, AddEditMfPage.route,
-                          //     arguments: EditMfPageArgs(mf)),
+                          if (this.isCarExit)
+                            {print("Don't navigate on exit page.")}
+                          else
+                            {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CarExit(ce, db)))
+                            }
                         })),
           ),
         ],

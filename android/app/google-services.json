@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1057822217199",
-    "firebase_url": "https://carentry-654a4.firebaseio.com",
-    "project_id": "carentry-654a4",
-    "storage_bucket": "carentry-654a4.appspot.com"
+    "project_number": "186665046564",
+    "firebase_url": "https://carentry-e4968.firebaseio.com",
+    "project_id": "carentry-e4968",
+    "storage_bucket": "carentry-e4968.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1057822217199:android:12c756add4aae2c5b45c1a",
+        "mobilesdk_app_id": "1:186665046564:android:2d2eeb5887a405f0b63eb1",
         "android_client_info": {
           "package_name": "com.oga.car_entry_exit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1057822217199-qpatkpp9h1veao1i5danu0mutf226mqi.apps.googleusercontent.com",
+          "client_id": "186665046564-1dcktju2tfclu7e65n7d4gg98u84bimi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCHE1Mp6hfGqOx-_bdoHwuOQfbuloAbcEY"
+          "current_key": "AIzaSyDciIg0GNQURQ-zqXqs2cUjKhIpRqijEQY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1057822217199-qpatkpp9h1veao1i5danu0mutf226mqi.apps.googleusercontent.com",
+              "client_id": "186665046564-1dcktju2tfclu7e65n7d4gg98u84bimi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

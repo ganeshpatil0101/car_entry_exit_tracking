@@ -159,10 +159,20 @@ class _CarExitState extends State<CarExit> {
                       model: widget._carEntryData.model,
                       serviceType: widget._carEntryData.serviceType);
 
-                  widget.db
-                      .exitCar(data)
+                  widget._carEntryData.reference
+                      .updateData({
+                        'outDate': dateOut,
+                        'kmOut': kmOut,
+                        'carExitComment': carExtComment,
+                        'carExitBy': userID,
+                        'status': "OUT",
+                      })
                       .then((value) => {Navigator.pop(context)})
                       .catchError((err) => {showDialog(context: err)});
+                  // widget.db
+                  //     .exitCar(data)
+                  //     .then((value) => {Navigator.pop(context)})
+                  //     .catchError((err) => {showDialog(context: err)});
                 },
                 splashColor: Colors.deepPurple,
                 highlightColor: Colors.deepPurple,
