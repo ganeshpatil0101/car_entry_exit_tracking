@@ -22,7 +22,7 @@ class FirebaseDatabse {
 
   Future<List<DocumentSnapshot>> getModels() async {
     QuerySnapshot modelTypes = await models.getDocuments();
-    return modelTypes.documents;
+    return modelTypes.documents;        
   }
 
   Future<QuerySnapshot> getServiceTypes() async {

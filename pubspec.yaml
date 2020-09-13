@@ -17,6 +17,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
 
+
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
@@ -40,6 +41,9 @@ dependencies:
   #firebase_database: ^3.1.6
   cloud_firestore: ^0.12.9
   flutter_masked_text: ^0.8.0
+  firebase_messaging: ^5.1.8
+
+
 
 dev_dependencies:
   flutter_test:
@@ -51,7 +55,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

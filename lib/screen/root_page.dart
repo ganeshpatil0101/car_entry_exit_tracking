@@ -1,6 +1,8 @@
 import 'package:car_entry_exit/screen/dashboard.dart';
 import 'package:car_entry_exit/screen/login.dart';
+import 'package:car_entry_exit/screen/push_notifications.dart';
 import 'package:car_entry_exit/services/authentication.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 enum AuthStatus {
@@ -20,15 +22,20 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
+  PushNotificationsManager manager = PushNotificationsManager();
+
   String _userId = "";
 
   @override
   void initState() {
     super.initState();
+
+    manager.init();
+
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         if (user != null) {
-          _userId = user?.uid;
+          _userId = user?.email;
         }
         authStatus =
             user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
@@ -39,7 +46,7 @@ class _RootPageState extends State<RootPage> {
   void loginCallback() {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
-        _userId = user.uid.toString();
+        _userId = user.email.toString();
       });
     });
     setState(() {

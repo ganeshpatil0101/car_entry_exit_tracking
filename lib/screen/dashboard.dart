@@ -3,6 +3,7 @@ import 'package:car_entry_exit/screen/car_entry_list.dart';
 import 'package:car_entry_exit/screen/car_exit_list.dart';
 import 'package:car_entry_exit/services/authentication.dart';
 import 'package:car_entry_exit/services/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'transition_route_observer.dart';
@@ -44,6 +45,8 @@ class _DashboardScreenState extends State<DashboardScreen>
               padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
               child: RaisedButton(
                 onPressed: () {
+
+
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => CarEntry(db)));
                 },

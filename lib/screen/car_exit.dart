@@ -120,6 +120,12 @@ class _CarExitState extends State<CarExit> {
                   labelText: "Kilometer Out",
                   border: OutlineInputBorder(),
                 ),
+                  validator: (kmOut){
+                    if(kmOut == null || kmOut.isEmpty){
+                      return "Please enter kilometer in";
+                    }
+                    return null;
+                  }
               ),
             ),
             Padding(
