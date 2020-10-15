@@ -10,6 +10,20 @@ Maintain the car entry and car exit from the main gate of showroom.
 ## Screenshots
 
 - Login
-<img src="https://octodex.github.com/images/yaktocat.png" width="500">
+<img src="./screenshots/Login.png?raw=true" height="500" >
+- Dashboard
+<img src="./screenshots/Dashboard.png?raw=true" height="500" >
+- Car Entry Form
+<img src="./screenshots/Car-Entry-Form.png?raw=true" height="500" >
+- Car Exit Form
+<img src="./screenshots/Car-Exit-Form.png?raw=true" height="500" >
+- Car Entry List
+<img src="./screenshots/Car-Entry-List.png?raw=true" height="500" >
+- Logout / Sidebar
+<img src="./screenshots/Logout-Sidebar.png?raw=true" height="500" >
 
-<img src="./screenshots/Login.png?raw=true" alt="Login.png" height="500" >
+## Contributors
+
+ - Onkar Bavikar
+ - Ganesh Patil 
+ 
