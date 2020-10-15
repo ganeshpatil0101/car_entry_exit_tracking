@@ -1,16 +1,28 @@
 # car_entry_exit
+Maintain the car entry and car exit from the main gate of showroom.
 
-A new Flutter project.
+## Used Technologies
 
-## Getting Started
+ - Flutter
+ - Dart
+ - Firebase
 
-This project is a starting point for a Flutter application.
+## Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+- Login
+<img src="./screenshots/Login.png?raw=true" height="500" >
+- Dashboard
+<img src="./screenshots/Dashboard.png?raw=true" height="500" >
+- Car Entry Form
+<img src="./screenshots/Car-Entry-Form.png?raw=true" height="500" >
+- Car Exit Form
+<img src="./screenshots/Car-Exit-Form.png?raw=true" height="500" >
+- Car Exit List
+<img src="./screenshots/Car-Exit-List.png?raw=true" height="500" >
+- Logout / Sidebar
+<img src="./screenshots/Logout-Sidebar.png?raw=true" height="500" >
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Contributors
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ - Onkar Bavikar
+ - Ganesh Patil 
