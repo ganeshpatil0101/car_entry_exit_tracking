@@ -12,4 +12,4 @@ Maintain the car entry and car exit from the main gate of showroom.
 - Login
 <img src="https://octodex.github.com/images/yaktocat.png" width="500">
 
-<img src="/ganeshpatil0101/car_entry_exit_tracking/blob/divergedBranch/screenshots/Login.png?raw=true" alt="Login.png" height="500" >
+<img src="./screenshots/Login.png?raw=true" alt="Login.png" height="500" >
