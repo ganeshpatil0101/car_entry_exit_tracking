@@ -17,8 +17,8 @@ Maintain the car entry and car exit from the main gate of showroom.
 <img src="./screenshots/Car-Entry-Form.png?raw=true" height="500" >
 - Car Exit Form
 <img src="./screenshots/Car-Exit-Form.png?raw=true" height="500" >
-- Car Entry List
-<img src="./screenshots/Car-Entry-List.png?raw=true" height="500" >
+- Car Exit List
+<img src="./screenshots/Car-Exit-List.png?raw=true" height="500" >
 - Logout / Sidebar
 <img src="./screenshots/Logout-Sidebar.png?raw=true" height="500" >
 
@@ -26,4 +26,3 @@ Maintain the car entry and car exit from the main gate of showroom.
 
  - Onkar Bavikar
  - Ganesh Patil 
- 
