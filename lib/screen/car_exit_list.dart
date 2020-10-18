@@ -8,10 +8,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class CarExitList extends StatefulWidget {
-  CarExitList(this.db);
+  CarExitList(this.db, this.isAdmin);
   static const routeName = '/carexit';
   final FirebaseDatabse db;
-
+  final isAdmin;
   @override
   State<StatefulWidget> createState() => new CarExitListState();
 }
@@ -37,7 +37,7 @@ class CarExitListState extends State<CarExitList> {
             var ch = snapshots.map((s) {
               index++;
               CarEntryData ce = CarEntryData.fromSnapshot(s);
-              return CarEntryItem(ce, index, widget.db, true);
+              return CarEntryItem(ce, index, widget.db, true, widget.isAdmin);
             });
 
             List<Widget> chw = [];

@@ -6,13 +6,13 @@ class FirebaseDatabse {
 
   final CollectionReference carEntryList;
   final CollectionReference carExitList;
-  final CollectionReference serviceTypes;
+  final CollectionReference admins;
   final CollectionReference models;
   final userId;
   FirebaseDatabse(String userId)
       : this.carEntryList = _db.collection("Vehicles"),
         this.carExitList = _db.collection("VehiclesExit"),
-        serviceTypes = _db.collection("servicetype"),
+        admins = _db.collection("admin"),
         models = _db.collection("models"),
         this.userId = userId;
 
@@ -22,11 +22,11 @@ class FirebaseDatabse {
 
   Future<List<DocumentSnapshot>> getModels() async {
     QuerySnapshot modelTypes = await models.getDocuments();
-    return modelTypes.documents;        
+    return modelTypes.documents;
   }
 
-  Future<QuerySnapshot> getServiceTypes() async {
-    return await serviceTypes.getDocuments();
+  Future<QuerySnapshot> getAdmins() async {
+    return await admins.getDocuments();
   }
 
   Stream<QuerySnapshot> getCarEntryListSnapshot() {

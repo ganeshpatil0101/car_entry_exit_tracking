@@ -12,8 +12,24 @@ class CarEntryItem extends StatelessWidget {
   final int index;
   final FirebaseDatabse db;
   final isCarExit;
-  CarEntryItem(this.ce, this.index, this.db, this.isCarExit)
+  final isAdmin;
+  CarEntryItem(this.ce, this.index, this.db, this.isCarExit, this.isAdmin)
       : key = ObjectKey(ce);
+
+  Widget showDelete() {
+    if (isCarExit == false && isAdmin) {
+      return IconButton(
+        icon: Icon(
+          Icons.delete,
+        ),
+        onPressed: () {
+          print("=== delete entry");
+        },
+      );
+    } else {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +90,7 @@ class CarEntryItem extends StatelessWidget {
                         )
                       ],
                     ),
+                    trailing: showDelete(),
                     onTap: () => {
                           if (this.isCarExit)
                             {print("Don't navigate on exit page.")}

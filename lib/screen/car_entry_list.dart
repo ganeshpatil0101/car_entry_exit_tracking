@@ -8,10 +8,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class CarEntryList extends StatefulWidget {
-  CarEntryList(this.db);
+  CarEntryList(this.db, this.isAdmin);
   static const routeName = '/auth';
   final FirebaseDatabse db;
-
+  final isAdmin;
   @override
   State<StatefulWidget> createState() => new CarEntryListState();
 }
@@ -30,7 +30,7 @@ class CarEntryListState extends State<CarEntryList> {
         var ch = snapshots.map((s) {
           index++;
           CarEntryData ce = CarEntryData.fromSnapshot(s);
-          return CarEntryItem(ce, index, widget.db, false);
+          return CarEntryItem(ce, index, widget.db, false, widget.isAdmin);
         });
 
         List<Widget> chw = [];

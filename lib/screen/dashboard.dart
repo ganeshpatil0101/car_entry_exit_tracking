@@ -1,3 +1,6 @@
+import 'dart:isolate';
+
+import 'package:car_entry_exit/comman/progress_indicator.dart';
 import 'package:car_entry_exit/screen/car_entry.dart';
 import 'package:car_entry_exit/screen/car_entry_list.dart';
 import 'package:car_entry_exit/screen/car_exit_list.dart';
@@ -21,9 +24,26 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen>
     with SingleTickerProviderStateMixin, TransitionRouteAware {
   FirebaseDatabse db;
+  bool isAdmin = false;
+  bool loading = true;
   initState() {
     db = new FirebaseDatabse(widget.userId);
+    db.getAdmins().then((data) {
+      setState(() {
+        isAdmin = this._isAdminUser(data.documents);
+        loading = false;
+      });
+    });
     super.initState();
+  }
+
+  bool _isAdminUser(data) {
+    for (var i in data) {
+      if (i.data['user'] == widget.userId) {
+        return true;
+      }
+    }
+    return false;
   }
 
   Future _logOutUser() async {
@@ -34,6 +54,9 @@ class _DashboardScreenState extends State<DashboardScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (loading) {
+      return PaddedCircularProgressIndicator();
+    }
     return Scaffold(
       appBar: AppBar(title: Text("Dashbord")),
       body: SingleChildScrollView(
@@ -45,8 +68,6 @@ class _DashboardScreenState extends State<DashboardScreen>
               padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
               child: RaisedButton(
                 onPressed: () {
-
-
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => CarEntry(db)));
                 },
@@ -63,7 +84,7 @@ class _DashboardScreenState extends State<DashboardScreen>
             shrinkWrap: true,
             padding: EdgeInsets.fromLTRB(15.0, 5, 15, 15),
             children: <Widget>[
-              CarEntryList(db),
+              CarEntryList(db, isAdmin),
             ],
           ),
         ],
@@ -89,8 +110,10 @@ class _DashboardScreenState extends State<DashboardScreen>
               title: Text('Car Exit List'),
               onTap: () {
                 // Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CarExitList(db)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CarExitList(db, isAdmin)));
               },
             ),
             ListTile(
