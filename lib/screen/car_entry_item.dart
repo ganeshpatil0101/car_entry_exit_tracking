@@ -24,6 +24,9 @@ class CarEntryItem extends StatelessWidget {
         ),
         onPressed: () {
           print("=== delete entry");
+          db.deleteCarEntry(ce).then((de) {
+            print("deleted ");
+          });
         },
       );
     } else {

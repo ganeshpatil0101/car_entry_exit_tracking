@@ -52,6 +52,10 @@ class FirebaseDatabse {
     return carEntryList.add(carExitData.toJson(carExitData));
   }
 
+  Future<void> deleteCarEntry(CarEntryData carEntryData) {
+    return carEntryData.reference.delete();
+  }
+
   String getUserId() {
     return this.userId;
   }
