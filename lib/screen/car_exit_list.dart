@@ -37,7 +37,7 @@ class CarExitListState extends State<CarExitList> {
             var ch = snapshots.map((s) {
               index++;
               CarEntryData ce = CarEntryData.fromSnapshot(s);
-              return CarEntryItem(ce, index, widget.db, true, widget.isAdmin);
+              return CarEntryItem(context,ce, index, widget.db, true, widget.isAdmin);
             });
 
             List<Widget> chw = [];

@@ -1,3 +1,5 @@
+
+
 import 'package:car_entry_exit/model/car_entry_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +10,13 @@ import 'car_exit.dart';
 
 class CarEntryItem extends StatelessWidget {
   final Key key;
+  final BuildContext context;
   final CarEntryData ce;
   final int index;
   final FirebaseDatabse db;
   final isCarExit;
   final isAdmin;
-  CarEntryItem(this.ce, this.index, this.db, this.isCarExit, this.isAdmin)
+  CarEntryItem(this.context, this.ce, this.index, this.db, this.isCarExit, this.isAdmin)
       : key = ObjectKey(ce);
 
   Widget showDelete() {
@@ -23,15 +26,53 @@ class CarEntryItem extends StatelessWidget {
           Icons.delete,
         ),
         onPressed: () {
-          print("=== delete entry");
-          db.deleteCarEntry(ce).then((de) {
-            print("deleted ");
-          });
+          showAlertDialog(context);
+
         },
       );
     } else {
       return null;
     }
+  }
+
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+
+    Widget cancelButton = FlatButton(
+      child: Text("Cancel"),
+      onPressed:  () {
+        Navigator.pop(context);
+
+      },
+    );
+    Widget deleteButton = FlatButton(
+      child: Text("Delete"),
+      onPressed:  () {
+        print("=== delete entry");
+        db.deleteCarEntry(ce).then((de) {
+          print("deleted ");
+          Navigator.pop(context);
+        });
+
+      },
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Notice"),
+      content: Text("Do you want to delete car "+ ce.regNum +" entry?"),
+      actions: [
+        cancelButton,
+        deleteButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override
